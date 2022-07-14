@@ -16,17 +16,25 @@
 let kvadratukai = [];
 
 function pildytiKvadratukus() {
-
+    for(let i=0; i<9; i++) {
+        let kvadratukas = '<div class="kvadratas"></div>';
+        document.querySelector('#zaidimoLaukas').innerHTML += kvadratukas;
+        kvadratukai.push(kvadratukas);
+    };
 };
 
-function pradeti(){
+// function isNaujo(){
+//     document.querySelector('#isNaujo').addEventListener('click', pildytiKvadratukus);
+// };
 
-}; 
-
-for(let i=0; i<9; i++) {
-    let kvadratukas = "<div class='kvadratas'></div>";
-    document.querySelector("#zaidimoLaukas").innerHTML += kvadratukas;
-    
+function teisingai() {
+    document.querySelector('.kvadratas').classList.add('geltona');
 };
 
-document.querySelector("#isNaujo").addEventListener("click", pradeti);
+function neteisingai() {
+    document.querySelector('.kvadratas').classList.add('raudona');
+};
+
+window.addEventListener('load', pildytiKvadratukus);
+//document.querySelector('.kvadratas').addEventListener('click', teisingai); <---neveikia
+document.querySelector('.kvadratas').addEventListener('click', teisingai);

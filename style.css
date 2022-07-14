@@ -10,4 +10,13 @@
     width: 200px;
     height: 200px;
     background-color: blue;
+    cursor: pointer;
+}
+
+.raudona {
+    background-color: red;
+}
+
+.geltona {
+    background-color: yellow;
 }
