@@ -1,40 +1,54 @@
-// kai uzsikrauna puslapis atsiranda nuo 9 iki 99 kvadrateliu 3 stulpeliais. pradzioje visi melyni
-
-//jeigu nera akmenuko nusidazo raudonai
-
-//jeigu yra nusidazo zaliai
-
-// pranesimas laimejot is 9 bandymo
-
-//turi buti mygtukas pradeti is naujo
-
-// (pradet nuo laimejimo salygos)
-// (apribot iki 9 pradzios)
-
 "use strict";
 
-let kvadratukai = [];
+// kai uzsikrauna puslapis atsiranda nuo 9 iki 99 kvadrateliu 3 stulpeliais. pradzioje visi melyni
+//jeigu nera akmenuko nusidazo raudonai
+//jeigu yra nusidazo zaliai
+// pranesimas laimejot is 9 bandymo
+//turi buti mygtukas pradeti is naujo
+// sugeneruoti 9 kvadrateliai
+// math random 0 iki 1
+// 9 iki 90
 
-function pildytiKvadratukus() {
-    for(let i=0; i<9; i++) {
-        let kvadratukas = '<div class="kvadratas"></div>';
-        document.querySelector('#zaidimoLaukas').innerHTML += kvadratukas;
-        kvadratukai.push(kvadratukas);
-    };
-};
+let kvadrateliai = Math.floor(Math.random()*82) + 9;
+let kvadrateliaiArray = [];
 
-// function isNaujo(){
-//     document.querySelector('#isNaujo').addEventListener('click', pildytiKvadratukus);
-// };
+function zaidimoPradzia() {
+    for (let i=0; i<kvadrateliai; i++) {
+        //kvadrateliu braizymas
+        let kvadratelis = document.createElement('div');
+        kvadratelis.classList.add('kvadratelis');
+        document.querySelector('#zaidimoLaukas').appendChild(kvadratelis);
+    
+        //masyvo pildymas
+        kvadrateliaiArray.push(0);
+    }
 
-function teisingai() {
-    document.querySelector('.kvadratas').classList.add('geltona');
-};
+    let akmenukas = Math.floor(Math.random()*(kvadrateliaiArray.length-1));
 
-function neteisingai() {
-    document.querySelector('.kvadratas').classList.add('raudona');
-};
+    kvadrateliaiArray[akmenukas] = 1;
 
-window.addEventListener('load', pildytiKvadratukus);
-//document.querySelector('.kvadratas').addEventListener('click', teisingai); <---neveikia
-document.querySelector('.kvadratas').addEventListener('click', teisingai);
+    let kvadrateliaiPaspaudimai = document.querySelectorAll('.kvadratelis');
+
+    for (let j=0; j<kvadrateliaiPaspaudimai.length; j++) {
+        kvadrateliaiPaspaudimai[j].addEventListener('click', function() {
+            // kaip atpazinti kuris yra paspaustas
+            console.log(j); // paspausto kvadratelio vieta masyve
+            if(kvadrateliaiArray[j] == 1) {
+                document.querySelector('#info').innerHTML = 'Laimėjai!';
+                this.classList.add('geltona');
+            } else {
+                document.querySelector('#info').innerHTML = 'Nelaimejai, spausk kitą';
+                this.classList.add('raudona');
+            }
+        });
+    }
+}
+
+function isNaujo() {
+    window.location.reload();
+}
+
+
+window.addEventListener('load', zaidimoPradzia);
+
+document.querySelector('#isNaujo').addEventListener('click', isNaujo);
